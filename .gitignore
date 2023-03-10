@@ -1,0 +1,12 @@
+index.html
+api.html
+applications/settings.js
+client/resources/*
+client/data/*
+client/BGM/*
+AI/*
+src/Plugins/*/
+.idea/
+node_modules
+dist
+package-lock.json
