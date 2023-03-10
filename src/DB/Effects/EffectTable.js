@@ -2630,7 +2630,22 @@ define(function( require )
 		}],
 		
 		122: [{	//EF_SONICBLOWHIT	   Multi hit effect
-			wav:  'effect/assasin_sonicblow'
+			//wav:  'effect/assasin_sonicblow' // old
+			
+			type: 'FUNC',
+			attachedEntity: true,
+			func: function( Params ) {
+				var entity = Params.Init.ownerEntity;
+				var Renderer = require('Renderer/Renderer');
+				var delay = Params.Inst.startTick - Renderer.tick;
+				
+				entity.animations.add(function(tick){
+					if (tick >= delay){
+						entity.direction = (entity.direction + 2) % 8; // Spinning around
+						return true;
+					}
+				});
+			}
 		}],
 
 		123: [{ //grimtooth caster	//EF_GRIMTOOTH	Grimtooth Cast
@@ -4330,7 +4345,18 @@ define(function( require )
 			zIndex: 1
 		}],
 		
-		//309: [{}],	//EF_FIRSTAID	   First Aid
+		309: [{	//EF_FIRSTAID	   First Aid
+			type: '2D',
+			alphaMax: 0.2,
+			blendMode: 2,
+			file: 'effect/pikapika2.bmp',
+			fadeOut: true,
+			duration: 1000,
+			size: 100,
+			posz: 2,
+			wav: '_heal_effect'
+		}],
+		
 		//310: [{}],	//EF_SPRINKLESAND	   Sprinkle Sand
 
 		311: [{ //crazy uproar	//EF_LOUD	Crazy Uproar
